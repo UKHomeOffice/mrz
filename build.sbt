@@ -16,5 +16,7 @@ libraryDependencies += "org.specs2" %% "specs2-core" % "3.4" % "test"
 
 libraryDependencies += "net.sourceforge.tess4j" % "tess4j" % "2.0.0"
 
+assemblyJarName in assembly := "mrz.jar"
+
 
 

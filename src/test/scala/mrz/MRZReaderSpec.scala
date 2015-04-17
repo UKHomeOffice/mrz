@@ -1,4 +1,4 @@
-package ocr
+package mrz
 
 import org.specs2.mutable.Specification
 
@@ -9,7 +9,8 @@ class MRZReaderSpec extends Specification {
   "MRZ Reader" should {
 
     "read a passport image file" in {
-      reader.ocr("src/test/resources/passport-images/passport2.jpg") must beSome.which(_.contains("P<"))
+      val text = reader.ocr("src/test/resources/passport-images/passport2.jpg")
+      text must contain ("P<")
     }
 
     "parse the MRZ from text" in {
@@ -43,8 +44,8 @@ class MRZReaderSpec extends Specification {
 
     "parse the MRZ from a passport image file" in {
       
-      reader.readMRZ("src/test/resources/passport-images/passport2.jpg") must beSome(
-        "P<GBRPARKER<<BEN<CHRISTOPHER<<<<<<<<<<<<<<<<3021162520GBR7304073M1306112<<<<<<<<<<<<<<04")
+      val mrz = reader.readMRZ("src/test/resources/passport-images/passport2.jpg")
+      mrz mustEqual MRZ("P", "GBR", "PARKER", "BEN CHRISTOPHER", "302116252", "0", "GBR", "730407", "3", "M", "130611", "2", "", "0", "4")
     }
   }
 
