@@ -4,17 +4,16 @@ import org.specs2.mutable.Specification
 
 class MRZReaderSpec extends Specification {
 
-  val reader = new MRZReader{}
+  object MRZProcessor extends MRZReader with MRZCorrector
 
   "MRZ Reader" should {
 
     "read a passport image file" in {
-      val text = reader.ocr("src/test/resources/passport-images/passport2.jpg")
+      val text = MRZProcessor.ocr("src/test/resources/passport-images/passport2.jpg")
       text must contain ("P<")
     }
 
     "parse the MRZ from text" in {
-
       val ocrText =
         """
           |United Kingdom of Greatddﬂritain and Northern Ireland
@@ -36,15 +35,14 @@ class MRZReaderSpec extends Specification {
           |k--_ ____ _ . ,. -,.'_‘_.. . , ' 4:
         """.stripMargin
 
-      val mrz = reader.mrz(ocrText)
+      val mrz = MRZProcessor.mrz(ocrText)
 
       mrz.length mustEqual 88
       mrz mustEqual "P<GBRPARKER<<BEN<CHRISTOPHER<<<<<<<<<<<<<<<<3021162520GBR7304073M1306112<<<<<<<<<<<<<<04"
     }
 
     "parse the MRZ from a passport image file" in {
-      
-      val mrz = reader.readMRZ("src/test/resources/passport-images/passport2.jpg")
+      val mrz = MRZProcessor.readMRZ("src/test/resources/passport-images/passport2.jpg")
       mrz mustEqual MRZ("P", "GBR", "PARKER", "BEN CHRISTOPHER", "302116252", "0", "GBR", "730407", "3", "M", "130611", "2", "", "0", "4")
     }
   }

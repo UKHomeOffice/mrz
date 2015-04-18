@@ -4,7 +4,7 @@ import java.io.File
 import scala.io.Source
 
 trait MRZReader {
-  val corrector = new MRZCorrector{}
+  corrector: MRZCorrector =>
 
   def readMRZ(filename: String): MRZ = {
     val imageText = ocr(filename)

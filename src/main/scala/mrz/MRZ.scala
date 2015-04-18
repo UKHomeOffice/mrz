@@ -1,8 +1,8 @@
 package mrz
 
-case class MRZ(idType: String, issuingCountry: String, lastName: String, givenNames: String,
-               passportNo: String, checkDigit1: String, nationality: String, dob: String, checkDigit2: String,
-               gender: String, passportExpirationDate: String, checkDigit3: String, personalNo: String, checkDigit4: String, checkDigit5: String)
+case class MRZ(idType: String, issuingCountry: String, lastName: String, givenNames: String, passportNo: String,
+               checkDigit1: String, nationality: String, dob: String, checkDigit2: String, gender: String,
+               passportExpirationDate: String, checkDigit3: String, personalNo: String, checkDigit4: String, checkDigit5: String)
 
 object MRZ {
 

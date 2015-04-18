@@ -1,6 +1,6 @@
 package mrz
 
-object MRZApp extends App with MRZReader {
+object MRZApp extends App with MRZReader with MRZCorrector {
 
   val filename = args(0)
   println("Reading MRZ from image file: " + filename)
